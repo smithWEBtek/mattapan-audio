@@ -1,0 +1,54 @@
+#info {
+	top: 0;
+	width: 100%;
+	height: 100%;
+}
+
+.data-entry-form {
+  margin-top: 16px;
+  width: 30%;
+}
+
+#map {
+	width: 75%;
+	height: 640px;
+	background-color: rgb(221, 236, 250);
+}
+
+.form-margin{
+	margin: 10px;
+}
+
+.address-confimation {
+	width: 640px;
+	background-color: rgb(255, 239, 188);
+}
+
+fieldset{
+	padding: 10px;
+	background-color: rgb(252, 250, 250);
+  width: 350px;
+}
+ 
+#logo-image{
+	width: 80px;
+	height: 90px;
+}
+ 
+#audio-upload-form {
+	background-color: rgb(250, 240, 211);
+	padding: 5px;
+  width: auto;
+}
+
+#submit-vote-preference-button{
+	background-color:  rgb(250, 240, 211);
+}
+
+#geocode{
+	background-color: rgb(201, 214, 228);
+}
+
+.button {
+  margin: 12px 0;
+}

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Mattapan Mapping Audio Upload</title>
+  <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+
+  <script src='lib/leaflet/leaflet.js'></script>
+  <link rel="stylesheet" href="/lib/leaflet/leaflet.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="styles.css">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://js.api.here.com/v3/3.0/mapsjs-core.js" type="text/javascript" charset="utf-8"></script>
+  <script src="https://js.api.here.com/v3/3.0/mapsjs-service.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>
+  <div class='section'>
+    <h1 class="title">Listen to Mattapan</h1>
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+        <img src="lib/img/welcome.jpeg" id='mattpan-welcome' alt="welcome-to-mattapan">
+      </div>
+    </nav>
+    <div class='columns'>
+      <div class="data-entry-form">
+        <fieldset>
+          <div>
+            <h2 class='is-2'>To upload an audio file, please <strong>enter the street address</strong> in the form.
+              <br>
+              <br>
+              <p>Or <strong>use the map to Zoom and Click </strong> on the desired location until you see the correct
+                address in the form. You can also edit the form directly.</p>
+              <br>
+              <p>When your address appears correctly in the form, select your audio file, and click Upload Audio
+                button.</p>
+            </h2>
+            <button class="button is-primary" id='load-mattapan-view'>Refresh map</button>
+            <form id='audio-upload-form' class='form-margin'>
+              <input type="text" id="street_number" placeholder="street number">
+              <input type="text" id="street_name" placeholder="street name">
+              <input type="text" id="city" placeholder="city">
+              <input type="text" id="state" placeholder="state">
+              <input type="text" id="postal_code" placeholder="postal_code">
+              <br />
+              <br />
+              <h3 id="geocode-label">geocode (lat, lng):</h3>
+              <div id="geocode"></div>
+              <br />
+              <button class="button" id='upload-audio-file'>Upload Audio file</button>
+          </div>
+          </form>
+          <div class="column"></div>
+      </div>
+      <div class='column'>
+        <div id="map"></div>
+      </div>
+    </div>
+  </div>
+  </fieldset>
+
+  </div>
+</body>
+<script src="map.js"></script>
+
+</html>
