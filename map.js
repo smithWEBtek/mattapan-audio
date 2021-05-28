@@ -6,7 +6,8 @@ $(function () {
 	loadAllAudioMarkers()
 });
 
-const baseURL = 'https://mattapan-audio-api.smithwebtek.com/api/'
+// const baseURL = 'https://mattapan-audio-api.smithwebtek.com'
+const baseURL = 'http://127.0.0.1:3001'
 
 // API service www.here.com to geocode street address and vice versa
 let platform = new H.service.Platform({
@@ -20,7 +21,6 @@ let platform = new H.service.Platform({
 let geocoder = platform.getGeocodingService();
 
 // create an instance of Leaflet map, centered on Mattapan, zoom level 15
-// let map = L.map('map').setView([42.358056, -71.063611], 12);
 let map = L.map('map').setView([42.26722962533316,-71.09355255306583], 15);
 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 	attribution: 'Map data &copy; OpenStreetMap contributors'
@@ -34,14 +34,14 @@ function resetAddressForm() {
 	$('#state').val('')
 	$('#postal_code').val('')
 	$('#upload-audio-form').css("background-color", "rgb(250, 240, 211")
-	$('#upload-audio-file').css("background-color", "rgb(250, 240, 211")
+	// $('#upload-audio-file').css("background-color", "rgb(250, 240, 211")
 	$('#geocode').html('')
 }
 
 // get all audio files from database, pass the response to loadMarkers()
 function loadAllAudioMarkers() {
 	$.ajax({
-		url: baseURL + 'audio-files',
+		url: baseURL,
 		method: 'get',
 		dataType: 'json'
 	}).done(function (response) {
@@ -52,7 +52,20 @@ function loadAllAudioMarkers() {
 // receive array of audio file data; access the geocode field of each one; create a new Marker on the map
 function loadMarkers(markers) {
 	markers.forEach((marker) => {
-		if (marker) {
+    // if marker has NEITHER geocode NOR address_string
+    // if marker has BOTH geocode AND address_string
+
+
+
+    // if marker has geocode but NOT address_string
+      // GET https://revgeocode.search.hereapi.com/v1/revgeocode?at=48.2181679%2C16.3899064&lang=en-US
+      // Authorization: Bearer [your token]
+
+
+
+    // if marker has address_string but NOT geocode
+
+    if (marker.geocode) {
 			geocoder.geocode({ searchText: marker.address_string }, onResult, function (error) {
 				console.log("error with geocode request: ", error);
 			})
@@ -61,7 +74,6 @@ function loadMarkers(markers) {
 					marker.geocode = [data.Response.View[0].Result[0].Location.DisplayPosition.Latitude, data.Response.View[0].Result[0].Location.DisplayPosition.Longitude].toString()
 
 					new L.marker(marker.geocode.split(',').map(c => parseFloat(c)), {
-            // icon: <add audio file icon here>
 					}).addTo(map)
 				}
 			}
@@ -101,7 +113,7 @@ function newUploadForm() {
 
 			$.ajax({
 				method: 'post',
-				url: baseURL + 'audio-files',
+				url: baseURL + 'audio_files',
 				data: obj
 			}).done(function (data) {
 				let audioFile = new AudioFile(data)
@@ -110,7 +122,7 @@ function newUploadForm() {
 				loadDataToAddressForm(audioFile)
 
 				new L.marker(audioFile.geocode.split(',').map(c => parseFloat(c)), {
-					// icon: <set audioFile icon>
+					icon: '/leaflet/lib/images/sound.png'
 				}).addTo(map)
 				resetAddressForm()
 			})
