@@ -54,15 +54,9 @@ function loadMarkers(markers) {
 	markers.forEach((marker) => {
     // if marker has NEITHER geocode NOR address_string
     // if marker has BOTH geocode AND address_string
-
-
-
     // if marker has geocode but NOT address_string
       // GET https://revgeocode.search.hereapi.com/v1/revgeocode?at=48.2181679%2C16.3899064&lang=en-US
       // Authorization: Bearer [your token]
-
-
-
     // if marker has address_string but NOT geocode
 
     if (marker.geocode) {
@@ -72,6 +66,8 @@ function loadMarkers(markers) {
 			function onResult(data) {
 				if (data && data.Response.View[0]) {
 					marker.geocode = [data.Response.View[0].Result[0].Location.DisplayPosition.Latitude, data.Response.View[0].Result[0].Location.DisplayPosition.Longitude].toString()
+
+debugger
 
 					new L.marker(marker.geocode.split(',').map(c => parseFloat(c)), {
 					}).addTo(map)
@@ -122,7 +118,7 @@ function newUploadForm() {
 				loadDataToAddressForm(audioFile)
 
 				new L.marker(audioFile.geocode.split(',').map(c => parseFloat(c)), {
-					icon: '/leaflet/lib/images/sound.png'
+					icon: '/lib/leaflet/images/mic.svg'
 				}).addTo(map)
 				resetAddressForm()
 			})
