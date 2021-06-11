@@ -34,7 +34,7 @@ function resetAddressForm() {
 	$('#state').val('')
 	$('#postal_code').val('')
 	$('#upload-audio-form').css("background-color", "rgb(250, 240, 211")
-	// $('#upload-audio-file').css("background-color", "rgb(250, 240, 211")
+	// $('#download-data').css("background-color", "rgb(250, 240, 211")
 	$('#geocode').html('')
 }
 
@@ -79,7 +79,7 @@ debugger
 
 // user fills out address form, LatLng are derived by API, saved to database and rendered on map.
 function newUploadForm() {
-	$('button#upload-audio-file').on('click', function (event) {
+	$('button#download-data').on('click', function (event) {
 		event.preventDefault()
 
 		if (!$('#street_number').val()) {
@@ -202,6 +202,13 @@ function mattapanCenterView() {
 class AudioFile {
 	constructor(obj) {
 		this.id = obj.id,
+      // this.headline = obj.headline,
+      // this.interviewee = obj.interviewee,
+      // this.description = obj.description,
+      // this.url = obj.url,
+      // this.cloudinary_url = obj.cloudinary_url,
+      // this.location = obj.location,
+
 			this.street_number = obj.street_number,
 			this.street_name = obj.street_name,
 			this.city = obj.city,
